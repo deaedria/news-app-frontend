@@ -3,19 +3,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { fetcherGet } from '../lib/fetcher'
-import useAuth from '../lib/useAuth'
 import useSWR from 'swr'
 import jwt from "jwt-decode";
-import useUser from "../lib/useRequest";
 
-const Navbar = ({ userToken, id }) => {
-    // const { mutate, loadingAuth } = useAuth()
+const Navbar = ({ userToken, photo1 }) => {
     const Router = useRouter()
 
     if (userToken) {
         var dataUser = jwt(userToken.user)
-        // console.log(dataUser)
-        var { data, error } = useSWR(`${process.env.API_URI}users/${dataUser.id}`, fetcherGet)
+
+        var { data } = useSWR(`${process.env.API_URI}users/${dataUser.id}`, fetcherGet)
         var loading = !data
     }
 
@@ -82,12 +79,12 @@ const Navbar = ({ userToken, id }) => {
                                 <Image id="bell-img" src="/icon/bell.svg" alt="bell" width={20} height={20} />
                             </Link>
                         </span>
-                        {!loading && photo ? (
-                            <Link href={`/profile?id=${dataUser.id}`}>
-                                <Image id="round-img-1" src={`${process.env.PUBLIC_URI}${data?.photo_profile}`} alt="profile" width={36} height={35} />
+                        {(!loading && photo) || photo1 ? (
+                            <Link href={`/profile/?id=${dataUser.id}`}>
+                                <Image id="round-img-1" src={`${process.env.PUBLIC_URI}${photo1 ? photo1 : data?.photo_profile}`} alt="profile" width={36} height={35} />
                             </Link>
                         ) :
-                            (<Link href={`/profile?id=${dataUser.id}`}>
+                            (<Link href={`/profile/?id=${dataUser.id}`}>
                                 <Image id="round-img-1" src='/image/no-photo.png' alt="profile" width={36} height={35} />
                             </Link>)
                         }

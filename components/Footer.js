@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="footer mt-auto">
+        <footer className="footer mt-auto d-none d-md-block">
             <div className="d-flex container wrapper-bottom">
                 <div className="footer-left">
                     <a href="#">Why News Today</a><br /><br />
