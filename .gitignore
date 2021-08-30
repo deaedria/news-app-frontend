@@ -13,7 +13,6 @@
 /out/
 /out_publish/
 /out_functions/
-/netlify.toml
 
 # production
 /build
