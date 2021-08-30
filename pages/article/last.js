@@ -102,7 +102,7 @@ const Article = (props) => {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
     const res1 = await fetcherGet(`${process.env.API_URI}article/last`)
 

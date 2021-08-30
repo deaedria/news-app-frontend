@@ -185,7 +185,7 @@ const Article = (props) => {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const formPagination = {
         limit: 6,
         page: 1
