@@ -1,6 +1,6 @@
 ## News-App-Frontend
 
-This is a frontend part for [api project](https://github.com/deaedria/news-app-backend.git).
+News Today is a web app that users can create their personal accounts, write, comment and search for articles. This app was built with Next.js and the SWR library. In this app, there are also an example how to doing unit testing and a Wysiwyg editor has been provided for writing articles. Where the implementation of the editor is based on a draft.js. The [server side](https://github.com/deaedria/news-app-backend.git) created with Node.js and Express.js.
 
 ## Getting started
 
