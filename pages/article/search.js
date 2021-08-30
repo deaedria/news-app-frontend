@@ -63,7 +63,7 @@ const Article = () => {
                     <div className="mt-2 mb-5 row text-left sc-four">
                         {newsResult && newsResult.map((data) => {
                             return (
-                                <Link href={`/article/detail?id=${data.id}`}>
+                                <Link href={`/article/${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
                                             <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />

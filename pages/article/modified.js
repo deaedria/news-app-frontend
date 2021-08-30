@@ -27,7 +27,9 @@ const Article = (props) => {
                         <div className="p-home">
                             <p>You can be an author by being active in reading artciles in a month or you can request to be an author if you have been a member for three months.</p>
                         </div>
-                        <button className="w-20 btn btn-lg mt-4 btn-home">Start Writing</button>
+                        <Link href="/article/add">
+                            <button className="w-20 btn btn-lg mt-4 btn-home">Start Writing</button>
+                        </Link>
                     </div>
                     <div className="col-md-6"></div>
                 </div>
@@ -67,7 +69,7 @@ const Article = (props) => {
 
                         {newsLastModified.map((data, index) => {
                             return (
-                                <Link href={`/article/detail?id=${data.id}`}>
+                                <Link href={`/article/${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
                                             <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
