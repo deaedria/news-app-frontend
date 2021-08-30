@@ -10,7 +10,7 @@ import useSWR from 'swr'
 import { useRouter } from 'next/router'
 // import { fetcherLogout } from '../lib/fetcher'
 
-const Home = (props) => {
+const Home = ({ newsCategory, newsRecommend1, newsRecommend2, newsRecommend3, newsRecommend4, latestArticle, }) => {
     const { userToken, mutate } = useAuth()
     const Router = useRouter()
 
@@ -19,12 +19,12 @@ const Home = (props) => {
         rec1: 1, rec2: 2,
         rec3: 3, rec4: 4
     }
-    const { data: newsCategory } = useSWR(`${process.env.API_URI}category?limit=${category.limit}&page=${category.page}`, fetcherGet, { initialData: props.categories })
-    const { data: newsRecommend1 } = useSWR(`${process.env.API_URI}category/recommend/${category.rec1}`, fetcherGet, { initialData: props.recommend1 })
-    const { data: newsRecommend2 } = useSWR(`${process.env.API_URI}category/recommend/${category.rec2}`, fetcherGet, { initialData: props.recommend2 })
-    const { data: newsRecommend3 } = useSWR(`${process.env.API_URI}category/recommend/${category.rec3}`, fetcherGet, { initialData: props.recommend3 })
-    const { data: newsRecommend4 } = useSWR(`${process.env.API_URI}category/recommend/${category.rec4}`, fetcherGet, { initialData: props.recommend4 })
-    const { data: latestArticle } = useSWR(`${process.env.API_URI}article/latest`, fetcherGet, { initialData: props.latest })
+    // const { data: newsCategory } = useSWR(`${process.env.API_URI}category?limit=${category.limit}&page=${category.page}`, fetcherGet, { initialData: props.categories })
+    // const { data: newsRecommend1 } = useSWR(`${process.env.API_URI}category/recommend/${category.rec1}`, fetcherGet, { initialData: props.recommend1 })
+    // const { data: newsRecommend2 } = useSWR(`${process.env.API_URI}category/recommend/${category.rec2}`, fetcherGet, { initialData: props.recommend2 })
+    // const { data: newsRecommend3 } = useSWR(`${process.env.API_URI}category/recommend/${category.rec3}`, fetcherGet, { initialData: props.recommend3 })
+    // const { data: newsRecommend4 } = useSWR(`${process.env.API_URI}category/recommend/${category.rec4}`, fetcherGet, { initialData: props.recommend4 })
+    // const { data: latestArticle } = useSWR(`${process.env.API_URI}article/latest`, fetcherGet, { initialData: props.latest })
 
     useEffect(() => {
         if (userToken?.length == undefined) {
@@ -52,109 +52,117 @@ const Home = (props) => {
             </section>
 
             <section className="sc-home-two">
-                <div className="sc-two-top container">
-                    <div className="tag-wrap">
-                        <h5>Popular Tags</h5>
-                        <a href="tags">#ladygaga</a>
-                        <a href="tags">#jokowidodo</a>
-                    </div>
-                    <div className="d-flex mt-4 justify-content-between wrap-category">
-                        <h5>Category</h5>
-                        <a href="#">More</a>
-                    </div>
-                    <div className="mt-2 d-flex row text-center sc-two">
-                        {newsCategory && newsCategory.map(item => (
-                            <div className="col-md-2 box-category">
-                                <Image src={`${process.env.PUBLIC_URI}${item.category_cover}`} alt="category" width={190} height={210} />
-                                <h6>{item.category_name}</h6>
+                {!newsCategory && !newsRecommend1 && !newsRecommend2 && !newsRecommend3 && !newsRecommend4 ?
+                    (
+                        <div>Loading...</div>
+                    )
+                    :
+                    (
+                        <div className="sc-two-top container">
+                            <div className="tag-wrap">
+                                <h5>Popular Tags</h5>
+                                <a href="tags">#ladygaga</a>
+                                <a href="tags">#jokowidodo</a>
                             </div>
-                        ))}
+                            <div className="d-flex mt-4 justify-content-between wrap-category">
+                                <h5>Category</h5>
+                                <a href="#">More</a>
+                            </div>
+                            <div className="mt-2 d-flex row text-center sc-two">
+                                {newsCategory && newsCategory.map(item => (
+                                    <div className="col-md-2 box-category">
+                                        <Image src={`${process.env.PUBLIC_URI}${item.category_cover}`} alt="category" width={190} height={210} />
+                                        <h6>{item.category_name}</h6>
+                                    </div>
+                                ))}
 
-                    </div>
-                    <div className="d-flex mt-4 justify-content-between wrap-recommend">
-                        <h5>Recommended</h5>
-                        <a href="#">More</a>
-                    </div>
-                    <div className="mt-2 d-flex mb-5 row text-left sc-three">
-                        {newsRecommend1 && newsRecommend1.map(item => (
-                            <Link href={`/article/detail/?id=${item.id}`}>
-                                <a className="col-sm-12 col-md-3">
-                                    <div className="d-flex article-box">
-                                        <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
-                                        <div className="article-right pt-2">
-                                            <h6 className="title">{item.article_title}</h6>
-                                            {/* <div className="article-info mb-2">
+                            </div>
+                            <div className="d-flex mt-4 justify-content-between wrap-recommend">
+                                <h5>Recommended</h5>
+                                <a href="#">More</a>
+                            </div>
+                            <div className="mt-2 d-flex mb-5 row text-left sc-three">
+                                {newsRecommend1 && newsRecommend1.map(item => (
+                                    <Link href={`/article/detail/?id=${item.id}`}>
+                                        <a className="col-sm-12 col-md-3">
+                                            <div className="d-flex article-box">
+                                                <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
+                                                <div className="article-right pt-2">
+                                                    <h6 className="title">{item.article_title}</h6>
+                                                    {/* <div className="article-info mb-2">
                                                 <Image src="/icon/like-icon.svg" alt="like icon" width={30} height={15} />
                                                 <span>2.1k</span>
                                                 <Image src="/icon/clock.svg" alt="clock icon" width={30} height={15} />
                                                 <span>1hr ago</span>
                                                 <Image src="/icon/bookmark.svg" alt="save icon" width={30} height={15} />
                                             </div> */}
-                                        </div>
-                                    </div>
-                                </a>
-                            </Link>
-                        ))}
-                        {newsRecommend2 && newsRecommend2.map(item => (
-                            <Link href={`/article/detail/?id=${item.id}`}>
-                                <a className="col-sm-12 col-md-3">
-                                    <div className="d-flex article-box home-b1">
-                                        <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
-                                        <div className="article-right pt-2">
-                                            <h6 className="title">{item.article_title}</h6>
-                                            {/* <div className="article-info mb-2">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </Link>
+                                ))}
+                                {newsRecommend2 && newsRecommend2.map(item => (
+                                    <Link href={`/article/detail/?id=${item.id}`}>
+                                        <a className="col-sm-12 col-md-3">
+                                            <div className="d-flex article-box home-b1">
+                                                <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
+                                                <div className="article-right pt-2">
+                                                    <h6 className="title">{item.article_title}</h6>
+                                                    {/* <div className="article-info mb-2">
                                                 <Image src="/icon/like-icon.svg" alt="like icon" width={30} height={15} />
                                                 <span>2.1k</span>
                                                 <Image src="/icon/clock.svg" alt="clock icon" width={30} height={15} />
                                                 <span>1hr ago</span>
                                                 <Image src="/icon/bookmark.svg" alt="save icon" width={30} height={15} />
                                             </div> */}
-                                        </div>
-                                    </div>
-                                </a>
-                            </Link>
-                        ))}
-                        {newsRecommend3 && newsRecommend3.map(item => (
-                            <Link href={`/article/detail/?id=${item.id}`}>
-                                <a className="col-sm-12 col-md-3">
-                                    <div className="d-flex article-box home-b2">
-                                        <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
-                                        <div className="article-right pt-2">
-                                            <h6 className="title">{item.article_title}</h6>
-                                            {/* <div className="article-info mb-2">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </Link>
+                                ))}
+                                {newsRecommend3 && newsRecommend3.map(item => (
+                                    <Link href={`/article/detail/?id=${item.id}`}>
+                                        <a className="col-sm-12 col-md-3">
+                                            <div className="d-flex article-box home-b2">
+                                                <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
+                                                <div className="article-right pt-2">
+                                                    <h6 className="title">{item.article_title}</h6>
+                                                    {/* <div className="article-info mb-2">
                                                 <Image src="/icon/like-icon.svg" alt="like icon" width={30} height={15} />
                                                 <span>2.1k</span>
                                                 <Image src="/icon/clock.svg" alt="clock icon" width={30} height={15} />
                                                 <span>1hr ago</span>
                                                 <Image src="/icon/bookmark.svg" alt="save icon" width={30} height={15} />
                                             </div> */}
-                                        </div>
-                                    </div>
-                                </a>
-                            </Link>
-                        ))}
-                        {newsRecommend4 && newsRecommend4.map(item => (
-                            <Link href={`/article/detail/?id=${item.id}`}>
-                                <a className="col-sm-12 col-md-3">
-                                    <div className="d-flex article-box home-b3">
-                                        <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
-                                        <div className="article-right pt-2">
-                                            <h6 className="title">{item.article_title}</h6>
-                                            {/* <div className="article-info mb-2">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </Link>
+                                ))}
+                                {newsRecommend4 && newsRecommend4.map(item => (
+                                    <Link href={`/article/detail/?id=${item.id}`}>
+                                        <a className="col-sm-12 col-md-3">
+                                            <div className="d-flex article-box home-b3">
+                                                <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
+                                                <div className="article-right pt-2">
+                                                    <h6 className="title">{item.article_title}</h6>
+                                                    {/* <div className="article-info mb-2">
                                                 <Image src="/icon/like-icon.svg" alt="like icon" width={30} height={15} />
                                                 <span>2.1k</span>
                                                 <Image src="/icon/clock.svg" alt="clock icon" width={30} height={15} />
                                                 <span>1hr ago</span>
                                                 <Image src="/icon/bookmark.svg" alt="save icon" width={30} height={15} />
                                             </div> */}
-                                        </div>
-                                    </div>
-                                </a>
-                            </Link>
-                        ))}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </Link>
+                                ))}
 
-                    </div>
-                </div>
+                            </div>
+                        </div>
+                    )
+                }
             </section>
 
             <section className="sc-home-three d-none d-md-block">
@@ -171,32 +179,40 @@ const Home = (props) => {
             </section>
 
             <section className="sc-home-four">
-                <div className="container">
-                    <div className="latest-news mt-5">
-                        <h5>Latest News</h5>
-                    </div>
-                    <div className="mt-2 mb-5 row text-left sc-four">
-                        {latestArticle && latestArticle.map(item => (
-                            <Link href={`/article/detail/?id=${item.id}`}>
-                                <a className="col-md-4">
-                                    <div className="mt-3 d-flex article-box">
-                                        <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
-                                        <div className="article-right pt-2">
-                                            <h6 className="title">{item.article_title}</h6>
-                                            {/* <div className="article-info mb-2">
+                {!latestArticle ?
+                    (
+                        <div>Loading...</div>
+                    )
+                    :
+                    (
+                        <div className="container">
+                            <div className="latest-news mt-5">
+                                <h5>Latest News</h5>
+                            </div>
+                            <div className="mt-2 mb-5 row text-left sc-four">
+                                {latestArticle && latestArticle.map(item => (
+                                    <Link href={`/article/detail/?id=${item.id}`}>
+                                        <a className="col-md-4">
+                                            <div className="mt-3 d-flex article-box">
+                                                <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
+                                                <div className="article-right pt-2">
+                                                    <h6 className="title">{item.article_title}</h6>
+                                                    {/* <div className="article-info mb-2">
                                                 <Image src="/icon/like-icon.svg" alt="like icon" width={30} height={15} />
                                                 <span>2.1k</span>
                                                 <Image src="/icon/clock.svg" alt="clock icon" width={30} height={15} />
                                                 <span>1hr ago</span>
                                                 <Image src="/icon/bookmark.svg" alt="save icon" width={30} height={15} />
                                             </div> */}
-                                        </div>
-                                    </div>
-                                </a>
-                            </Link>
-                        ))}
-                    </div>
-                </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    )
+                }
             </section>
 
             <Footer />
@@ -220,21 +236,21 @@ export async function getServerSideProps() {
 
     const res6 = await fetcherGet(`${process.env.API_URI}article/latest`)
 
-    const categories = await res1.json()
-    const recommend1 = await res2.json()
-    const recommend2 = await res3.json()
-    const recommend3 = await res4.json()
-    const recommend4 = await res5.json()
-    const latest = await res6.json()
-    
+    const newsCategory = await res1.json()
+    const newsRecommend1 = await res2.json()
+    const newsRecommend2 = await res3.json()
+    const newsRecommend3 = await res4.json()
+    const newsRecommend4 = await res5.json()
+    const latestArticle = await res6.json()
+
     return {
         props: {
-            categories,
-            recommend1,
-            recommend2,
-            recommend3,
-            recommend4,
-            latest
+            newsCategory,
+            newsRecommend1,
+            newsRecommend2,
+            newsRecommend3,
+            newsRecommend4,
+            latestArticle,
         }
     }
 }
