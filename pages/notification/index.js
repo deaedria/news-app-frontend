@@ -100,7 +100,7 @@ const Notification = () => {
                                         <div className="d-flex mt-3 justify-content-between">
                                             <div className="d-flex notif-list">
                                                 <div className="round-p">
-                                                    <Image id="round-img" src={`${process.env.PUBLIC_URI}${item.photo_profile}`} alt="profile" width={50} height={50} />
+                                                    <Image id="round-img" src={`https://newstoday-server.herokuapp.com${item.photo_profile}`} alt="profile" width={50} height={50} />
                                                 </div>
                                                 <div className="notif-r">
                                                     <h6>{item.notif}</h6>

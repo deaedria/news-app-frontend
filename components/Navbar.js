@@ -81,7 +81,7 @@ const Navbar = ({ userToken, photo1 }) => {
                         </span>
                         {(!loading && photo) || photo1 ? (
                             <Link href={`/profile/?id=${dataUser.id}`}>
-                                <Image id="round-img-1" src={`${process.env.PUBLIC_URI}${photo1 ? photo1 : data?.photo_profile}`} alt="profile" width={36} height={35} />
+                                <Image id="round-img-1" src={`https://newstoday-server.herokuapp.com${photo1 ? photo1 : data?.photo_profile}`} alt="profile" width={36} height={35} />
                             </Link>
                         ) :
                             (<Link href={`/profile/?id=${dataUser.id}`}>

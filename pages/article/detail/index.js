@@ -58,7 +58,7 @@ const Article = ({ newsDetail }) => {
                         <section className="container mt-5">
                             <div className="row">
                                 <div className="col-md-6 sc-left-d">
-                                    <Image src={`${process.env.PUBLIC_URI}${newsDetail.article_cover}`} alt="cover article" width={680} height={400} />
+                                    <Image src={`https://newstoday-server.herokuapp.com${newsDetail.article_cover}`} alt="cover article" width={680} height={400} />
                                 </div>
                                 <div className="col-md-6 sc-right-d">
                                     <h2 className="title-article">{newsDetail.article_title}</h2>
@@ -92,7 +92,7 @@ const Article = ({ newsDetail }) => {
                                     <div className="col-md-7 mt-2">
                                         <div className="d-flex input-comment">
                                             <div className="my-photo">
-                                                <Image src={`${process.env.PUBLIC_URI}${data?.photo_profile}`} alt="profile" width={50} height={50} />
+                                                <Image src={`https://newstoday-server.herokuapp.com${data?.photo_profile}`} alt="profile" width={50} height={50} />
                                             </div>
                                             <div className="comment-r">
                                                 <h6>{data.name}</h6>
@@ -109,7 +109,7 @@ const Article = ({ newsDetail }) => {
                                                     return (
                                                         <div className="d-flex list-c">
                                                             <div className="my-photo">
-                                                                <Image id="comment-p" src={`${process.env.PUBLIC_URI}${item.photo_profile}`} alt="profile" width={50} height={50} />
+                                                                <Image id="comment-p" src={`https://newstoday-server.herokuapp.com${item.photo_profile}`} alt="profile" width={50} height={50} />
                                                             </div>
                                                             <div className="comment-r">
                                                                 <h6>{item.name} - {moment(`${item.created_at}`).fromNow()}</h6>
@@ -138,7 +138,7 @@ const Article = ({ newsDetail }) => {
                                                 return (
                                                     <div className="d-flex list-c">
                                                         <div className="my-photo">
-                                                            <Image id="comment-p" src={`${process.env.PUBLIC_URI}${item.photo_profile}`} alt="profile" width={50} height={50} />
+                                                            <Image id="comment-p" src={`https://newstoday-server.herokuapp.com${item.photo_profile}`} alt="profile" width={50} height={50} />
                                                         </div>
                                                         <div className="comment-r">
                                                             <h6>{item.name} - {moment(`${item.created_at}`).fromNow()}</h6>
