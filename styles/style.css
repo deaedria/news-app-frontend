@@ -11,12 +11,12 @@
 .navbar-logo{
   font-family: 'Tinos', serif;
   margin-left: 50px;
+  margin-bottom: 10px;
 }
 .navbar-logo h3:hover{
   cursor: pointer;
 }
 .navbar-menu{
-  margin-left: -100px;
   margin-top: -8px;
 }
 .navbar-menu .active{
@@ -211,7 +211,7 @@
   background: linear-gradient(90deg, rgba(249, 250, 255, 0) 75%, #FAFBFF 100%);
 }
 .sc-three{
-  width: 120vw;
+  width: 100vw;
   flex-direction: row;
   background: linear-gradient(90deg, rgba(249, 250, 255, 0) 60%, #FAFBFF 100%);
 }
@@ -227,17 +227,17 @@ button.article-box{
   background: none;
 }
 .article-box{
-  width: 26.1vw;
+  width: 24vw;
   z-index: -9;
 }
 .home-b1{
-  margin-left: -30px;
+  margin-left: 0px;
 }
 .home-b2{
-  margin-left: -60px;
+  margin-left: 0px;
 }
 .home-b3{
-  margin-left: -90px;
+  margin-left: 0px;
 }
 .article-box.box-2{
   width: 26.1vw;
@@ -584,7 +584,7 @@ a{
 .btn-delete{
   margin-left: 80px;
 }
-.btn-delete .btn-wrap{
+.btn-delete .btn-wrap, .btn-add .btn-wrap{
   font-size: 17px;
   font-weight: 600;
   background: #376AED;
@@ -593,4 +593,71 @@ a{
   color: #fff;
   border: 0;
   padding: 10px 30px;
+}
+.box-editor{
+  width: 50vw;
+}
+.editor-class{
+  margin: 20px 0px 30px 0px;
+  border: 2px solid rgba(55, 106, 237, 0.3);
+  border-radius: 10px;
+  min-height: 270px;
+  padding-left: 18px;
+}
+.write-left{
+  max-height: 423px;
+  border-radius: 10px;
+  border: 2px solid rgba(55, 106, 237, 0.3);
+}
+.write-left .btn-dashed{
+  width: 90%;
+  height: 75%;
+  margin: 3% 5%;
+  border: 2px dashed rgba(55, 106, 237, 0.3);
+  background-color: transparent;
+}
+.write-input-right{
+  width: fit-content;
+  margin: 0px 5px 10px 35px;
+}
+.write-input-right input, .write-input-right select{
+  min-width: 24vw;
+  padding: 8px 18px;
+  border-radius: 10px;
+  border: 1px solid #bbbaba;
+  color: #2D4379;
+  font-size: 17px;
+}
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+select::-ms-expand {
+  display: none;
+}
+.input-article{
+  outline-style: none;
+}
+@media only screen and (max-width: 991px) and (min-width: 780px) {
+  .navbar-menu{
+    position: absolute;
+    left: 25%;
+  }
+  .navbar-button{
+    position: absolute;
+    right: -15%;
+  }
+}
+@media only screen and (max-width: 779px) {
+  .navbar-menu{
+    display: none
+  }
+  .navbar-button{
+    position: absolute;
+    right: -18%;
+  }
+  .article-box{
+    width: 80vw;
+    margin-left: 5%;
+  }
 }
