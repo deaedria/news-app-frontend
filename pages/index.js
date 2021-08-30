@@ -227,21 +227,21 @@ export async function getServerSideProps() {
         rec3: 3, rec4: 4
     }
 
-    const res1 = await fetcherGet(`${process.env.API_URI}category?limit=${category.limit}&page=${category.page}`)
+    // const res1 = await fetcherGet(`${process.env.API_URI}category?limit=${category.limit}&page=${category.page}`)
 
-    const res2 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec1}`)
-    const res3 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec2}`)
-    const res4 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec3}`)
-    const res5 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec4}`)
+    // const res2 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec1}`)
+    // const res3 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec2}`)
+    // const res4 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec3}`)
+    // const res5 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec4}`)
 
-    const res6 = await fetcherGet(`${process.env.API_URI}article/latest`)
+    // const res6 = await fetcherGet(`${process.env.API_URI}article/latest`)
 
-    const newsCategory = await res1.json()
-    const newsRecommend1 = await res2.json()
-    const newsRecommend2 = await res3.json()
-    const newsRecommend3 = await res4.json()
-    const newsRecommend4 = await res5.json()
-    const latestArticle = await res6.json()
+    const newsCategory = await fetcherGet(`${process.env.API_URI}category?limit=${category.limit}&page=${category.page}`)
+    const newsRecommend1 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec1}`)
+    const newsRecommend2 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec2}`)
+    const newsRecommend3 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec3}`) 
+    const newsRecommend4 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec4}`) 
+    const latestArticle = await fetcherGet(`${process.env.API_URI}article/latest`) 
 
     return {
         props: {
