@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Image from 'next/image'
 import Link from 'next/link'
-import Title from '../../components/Title'
-import Footer from '../../components/Footer'
-import Navbar from '../../components/Navbar'
-import useAuth from "../../lib/useAuth";
-import { fetcherGet } from '../../lib/fetcher'
+import Title from '../../../components/Title'
+import Footer from '../../../components/Footer'
+import Navbar from '../../../components/Navbar'
+import useAuth from "../../../lib/useAuth";
+import { fetcherGet } from '../../../lib/fetcher'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import moment from 'moment'
