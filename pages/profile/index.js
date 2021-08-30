@@ -13,59 +13,49 @@ import { useRouter } from 'next/router'
 const Profile = (props) => {
     const { userToken, mutate } = useAuth()
     const Router = useRouter()
+    
+    const { id } = Router.query
+    const { data: userProfile1 } = useSWR(`${process.env.API_URI}users/${id}`, fetcherGet, { initialData: props.profile })
+    let loading = !userProfile1
 
-    const id = Router.query?.id
-    const { data: userProfile } = useSWR(`${process.env.API_URI}users/${id}`, fetcherGet, { initialData: props.profile })
-    const { data: userProfile1 } = useSWR(`${process.env.API_URI}users/${id}`)
-    let loading = !userProfile
-    // console.log(userProfile)
-
-    const photo = userProfile?.photo_profile
+    const photo = userProfile1?.photo_profile
 
     const [readOnly, setReadOnly] = useState(true)
-    const [username, setUsername] = useState(`${userProfile.username}`);
-    const [name, setName] = useState(`${userProfile.name}`);
-    const [email, setEmail] = useState(`${userProfile.email}`);
+    const [username, setUsername] = useState(`${userProfile1.username}`);
+    const [name, setName] = useState(`${userProfile1.name}`);
+    const [email, setEmail] = useState(`${userProfile1.email}`);
     const [password, setPassword] = useState(null);
-    const [job, setJob] = useState(`${userProfile.job}`);
-    const [about, setAbout] = useState(`${userProfile.about}`);
+    const [job, setJob] = useState(`${userProfile1.job}`);
+    const [about, setAbout] = useState(`${userProfile1.about}`);
 
-    console.log(userProfile.password)
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(readOnly){
+        if (readOnly) {
             return;
-        }else{
-            if(password==null){
+        } else {
+            if (password == null) {
                 const data = { username, name, email, job, about };
                 fetcherUpdate(`${process.env.API_URI}users/${id}`, data)
-                alert("Update User Success")
+                // alert("Update User Success")
                 setReadOnly(true)
-                // window.location.reload()
-            }else{
+                window.location.href = `/profile/?id=${id}`
+            } else {
                 const data = { username, name, password, email, job, about };
-                // console.log(data.password)
                 fetcherUpdate(`${process.env.API_URI}users/${id}`, data)
-                alert("Update User Success")
+                // alert("Update User Success")
                 setReadOnly(true)
-                // window.location.reload()
+                window.location.href = `/profile/?id=${id}`
             }
         }
     };
-
-    // useEffect(() => {
-    //     if (!userToken) {
-    //         Router.replace('/')
-    //     }
-    // }, [userToken]);
 
     return (
         <div>
             {userToken ?
                 <div>
                     <Title />
-                    <Navbar userToken={userToken} />
+                    <Navbar userToken={userToken} photo1={photo} />
                     {!loading ? (
                         <section className="sc-card-profile">
                             <div className="row box-left-p">
@@ -75,7 +65,7 @@ const Profile = (props) => {
                                         <div className="d-flex">
                                             {photo ? (
                                                 <div className="wrap-pp align-self-center">
-                                                    <Image id="image-l" src={`${process.env.PUBLIC_URI}${userProfile.photo_profile}`} alt="profile" width={66} height={66} />
+                                                    <Image id="image-l" src={`${process.env.PUBLIC_URI}${userProfile1.photo_profile}`} alt="profile" width={66} height={66} />
                                                 </div>
                                             ) : (
                                                 <div className="wrap-pp align-self-center">
@@ -84,19 +74,19 @@ const Profile = (props) => {
                                             )
                                             }
                                             <div className="card-top-right">
-                                                <p className="un-card">@{userProfile.username && userProfile.username !== 'null' ? userProfile.username || userProfile1?.username : ''}</p>
-                                                <h5 className="name-card">{userProfile.name && userProfile.name !== 'null' ? userProfile.name || userProfile1?.name : '-'}</h5>
-                                                {userProfile.job && userProfile.job !== 'null' ? (
-                                                    <p className="status-card">{userProfile.job || userProfile1?.job}</p>
+                                                <p className="un-card">@{userProfile1.username && userProfile1.username !== 'null' ? userProfile1.username || userProfile1?.username : ''}</p>
+                                                <h5 className="name-card">{userProfile1.name && userProfile1.name !== 'null' ? userProfile1.name || userProfile1?.name : '-'}</h5>
+                                                {userProfile1.job && userProfile1.job !== 'null' ? (
+                                                    <p className="status-card">{userProfile1.job || userProfile1?.job}</p>
                                                 )
                                                     : (
-                                                        <p className="status-card">{userProfile.role || userProfile1?.role}</p>
+                                                        <p className="status-card">{userProfile1.role || userProfile1?.role}</p>
                                                     )
                                                 }
                                             </div>
                                         </div>
                                         <h6 className="mt-3">About me</h6>
-                                        <p className="p-btm">{userProfile.about && userProfile.about !== 'null' ? userProfile.about || userProfile1?.about : '-'}</p>
+                                        <p className="p-btm">{userProfile1.about && userProfile1.about !== 'null' ? userProfile1.about || userProfile1?.about : '-'}</p>
                                     </div>
                                     <div className="card-btm mt-4">
                                         <div className="d-flex justify-content-between box-list-p">
@@ -141,7 +131,7 @@ const Profile = (props) => {
                                         </div>
                                         <div className="d-flex justify-content-between box-list-p">
                                             <div className="list-l">
-                                                <Link href="#">
+                                                <Link href="/">
                                                     <a onClick={() => { fetcherLogout(); mutate(null); Router.replace('/') }}>Logout</a>
                                                 </Link>
                                             </div>
@@ -154,16 +144,16 @@ const Profile = (props) => {
 
                                 <div className="col-md-8 sc-profile">
                                     <div className="d-flex justify-content-between sc-profile-right">
-                                    {photo ? (
-                                        <div className="image-center">
-                                            <Image id="image-r" src={`${process.env.PUBLIC_URI}${userProfile.photo_profile}`} alt="profile" width={90} height={90} />
-                                        </div>
-                                    ): (
-                                        <div className="image-center">
-                                            <Image id="image-r" src='/image/no-photo.png' alt="profile" width={90} height={90} />
-                                        </div>
-                                    )
-                                    }
+                                        {photo ? (
+                                            <div className="image-center">
+                                                <Image id="image-r" src={`${process.env.PUBLIC_URI}${userProfile1.photo_profile}`} alt="profile" width={90} height={90} />
+                                            </div>
+                                        ) : (
+                                            <div className="image-center">
+                                                <Image id="image-r" src='/image/no-photo.png' alt="profile" width={90} height={90} />
+                                            </div>
+                                        )
+                                        }
                                         <div className="save">
                                             <button className="btn-save" type="submit" onClick={handleSubmit}>Save Change</button>
                                             <button className="btn-save" onClick={() => setReadOnly(false)}>Edit</button>
@@ -174,19 +164,19 @@ const Profile = (props) => {
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="username">Username:</label>
-                                                <input defaultValue={userProfile.username && userProfile.username !== 'null' ? userProfile.username : '-'} type="text" className="form-control" id="username" readOnly={readOnly} onChange={(e) => setUsername(e.target.value)} />
+                                                <input defaultValue={userProfile1.username && userProfile1.username !== 'null' ? userProfile1.username : '-'} type="text" className="form-control" id="username" readOnly={readOnly} onChange={(e) => setUsername(e.target.value)} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="name">Name:</label>
-                                                <input defaultValue={userProfile.name && userProfile.name !== 'null' ?  userProfile.name : '-'} type="text" className="form-control" id="name" readOnly={readOnly} onChange={(e) => setName(e.target.value)}/>
+                                                <input defaultValue={userProfile1.name && userProfile1.name !== 'null' ? userProfile1.name : '-'} type="text" className="form-control" id="name" readOnly={readOnly} onChange={(e) => setName(e.target.value)} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="email">Email:</label>
-                                                <input defaultValue={userProfile.email && userProfile.email !== 'null' ? userProfile.email : '-'} type="email" className="form-control" id="email" readOnly={readOnly} onChange={(e) => setEmail(e.target.value)} />
+                                                <input defaultValue={userProfile1.email && userProfile1.email !== 'null' ? userProfile1.email : '-'} type="email" className="form-control" id="email" readOnly={readOnly} onChange={(e) => setEmail(e.target.value)} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
@@ -198,17 +188,17 @@ const Profile = (props) => {
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="job">Job:</label>
-                                                <input defaultValue={userProfile.job && userProfile.job !== 'null' ? userProfile.job : '-'} type="text" className="form-control" id="job" readOnly={readOnly} onChange={(e) => setJob(e.target.value)} />
+                                                <input defaultValue={userProfile1.job && userProfile1.job !== 'null' ? userProfile1.job : '-'} type="text" className="form-control" id="job" readOnly={readOnly} onChange={(e) => setJob(e.target.value)} />
                                             </div>
 
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="about">About:</label>
-                                                <textarea className="about" defaultValue={userProfile.about && userProfile.about !== 'null' ? userProfile.about : '-'} type="text" className="form-control" id="about" readOnly={readOnly} onChange={(e) => setAbout(e.target.value)} />
+                                                <textarea className="about" defaultValue={userProfile1.about && userProfile1.about !== 'null' ? userProfile1.about : '-'} type="text" className="form-control" id="about" readOnly={readOnly} onChange={(e) => setAbout(e.target.value)} />
                                             </div>
                                         </div>
-                                        {userProfile.role == 'member' ? (
+                                        {userProfile1.role == 'member' ? (
                                             <center>
                                                 <div className="btn-request mt-4">
                                                     <button>Request to be an author</button>
@@ -242,19 +232,21 @@ const Profile = (props) => {
     )
 }
 
-export async function getStaticProps() {
-    // const userToken = localStorage.getItem('userToken')
+// export async function getStaticPaths() {
+//     const res = await fetcherGet(`${process.env.API_URI}users`)
+    
+//     const paths = res.map((user) => ({
+//         params: { id: user.id.toString() },
+//     }))
+    
+//     return { paths, fallback: false }
+// }
 
-    // if(userToken){
-        // var dataUser = jwt(userToken.user)
-        var profile = await fetcherGet(`${process.env.API_URI}users`)
-    // }
 
-    return {
-        props: {
-            profile
-        }
-    }
+export async function getServerSideProps({query}) {
+    const profile = await fetcherGet(`${process.env.API_URI}users/${query.id}`)
+    
+    return { props: { profile } }
 }
 
 export default Profile
