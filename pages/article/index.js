@@ -241,7 +241,27 @@ const Article = (props) => {
     )
 }
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
+
+//     const categoriesList1 = await fetcherGet(`${process.env.API_URI}category/list/1`)
+//     const categoriesList2 = await fetcherGet(`${process.env.API_URI}category/list/2`)
+//     const categoriesList3 = await fetcherGet(`${process.env.API_URI}category/list/3`)
+//     const categoriesList4 = await fetcherGet(`${process.env.API_URI}category/list/4`)
+//     const categoriesList5 = await fetcherGet(`${process.env.API_URI}category/list/5`)
+//     const categoriesList6 = await fetcherGet(`${process.env.API_URI}category/list/6`)
+
+//     return {
+//         props: {
+//             categoriesList1,
+//             categoriesList2,
+//             categoriesList3,
+//             categoriesList4,
+//             categoriesList5,
+//             categoriesList6
+//         }
+//     }
+// }
+export async function getServerSideProps() {
 
     const categoriesList1 = await fetcherGet(`${process.env.API_URI}category/list/1`)
     const categoriesList2 = await fetcherGet(`${process.env.API_URI}category/list/2`)

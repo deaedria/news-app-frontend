@@ -185,7 +185,26 @@ const Article = (props) => {
     )
 }
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
+//     const formPagination = {
+//         limit: 6,
+//         page: 1
+//     }
+//     const articleA = await fetcherGet(`${process.env.API_URI}article/asc`)
+//     const articleB = await fetcherGet(`${process.env.API_URI}article/desc`)
+//     const articleAsc = await fetcherGet(`${process.env.API_URI}article/asc?limit=${formPagination.limit}&page=${formPagination.page}`)
+//     const articleDesc = await fetcherGet(`${process.env.API_URI}article/desc?limit=${formPagination.limit}&page=${formPagination.page}`)
+
+//     return {
+//         props: {
+//             articleA,
+//             articleB,
+//             articleAsc,
+//             articleDesc
+//         }
+//     }
+// }
+export async function getServerSideProps() {
     const formPagination = {
         limit: 6,
         page: 1

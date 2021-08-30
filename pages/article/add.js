@@ -81,15 +81,21 @@ const Article = (props) => {
     )
 }
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
 
+//     const categoriesList = await fetcherGet(`${process.env.API_URI}category`)
+
+//     return {
+//         props: {
+//             categoriesList
+//         }
+//     }
+// }
+
+export async function getServerSideProps() {
     const categoriesList = await fetcherGet(`${process.env.API_URI}category`)
-
-    return {
-        props: {
-            categoriesList
-        }
-    }
+    
+    return { props: { categoriesList } }
 }
 
 export default Article

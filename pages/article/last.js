@@ -102,15 +102,21 @@ const Article = (props) => {
     )
 }
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
 
+//     const articleLastAdded = await fetcherGet(`${process.env.API_URI}article/last`)
+
+//     return {
+//         props: {
+//             articleLastAdded
+//         }
+//     }
+// }
+
+export async function getServerSideProps() {
     const articleLastAdded = await fetcherGet(`${process.env.API_URI}article/last`)
-
-    return {
-        props: {
-            articleLastAdded
-        }
-    }
+    
+    return { props: { articleLastAdded } }
 }
 
 export default Article

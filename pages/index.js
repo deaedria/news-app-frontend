@@ -204,7 +204,34 @@ const Home = (props) => {
     )
 }
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
+//     const category = {
+//         limit: 6, page: 1,
+//         rec1: 1, rec2: 2,
+//         rec3: 3, rec4: 4
+//     }
+
+//     const categories = await fetcherGet(`${process.env.API_URI}category?limit=${category.limit}&page=${category.page}`)
+
+//     const recommend1 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec1}`)
+//     const recommend2 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec2}`)
+//     const recommend3 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec3}`)
+//     const recommend4 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec4}`)
+
+//     const latest = await fetcherGet(`${process.env.API_URI}article/latest`)
+
+//     return {
+//         props: {
+//             categories,
+//             recommend1,
+//             recommend2,
+//             recommend3,
+//             recommend4,
+//             latest
+//         }
+//     }
+// }
+export async function getServerSideProps() {
     const category = {
         limit: 6, page: 1,
         rec1: 1, rec2: 2,
