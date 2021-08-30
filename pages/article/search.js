@@ -101,13 +101,15 @@ const Article = () => {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
-    const articleSearch = await fetcherGet(`${process.env.API_URI}article`)
+    const res1 = await fetcherGet(`${process.env.API_URI}article`)
+
+    const articleSearch = await res1.json()
 
     return {
         props: {
-            articleSearch : JSON.parse(JSON.stringify(articleSearch)),
+            articleSearch
         }
     }
 }

@@ -190,17 +190,22 @@ export async function getStaticProps() {
         limit: 6,
         page: 1
     }
-    const articleA = await fetcherGet(`${process.env.API_URI}article/asc`)
-    const articleB = await fetcherGet(`${process.env.API_URI}article/desc`)
-    const articleAsc = await fetcherGet(`${process.env.API_URI}article/asc?limit=${formPagination.limit}&page=${formPagination.page}`)
-    const articleDesc = await fetcherGet(`${process.env.API_URI}article/desc?limit=${formPagination.limit}&page=${formPagination.page}`)
+    const res1 = await fetcherGet(`${process.env.API_URI}article/asc`)
+    const res2 = await fetcherGet(`${process.env.API_URI}article/desc`)
+    const res3 = await fetcherGet(`${process.env.API_URI}article/asc?limit=${formPagination.limit}&page=${formPagination.page}`)
+    const res4 = await fetcherGet(`${process.env.API_URI}article/desc?limit=${formPagination.limit}&page=${formPagination.page}`)
+
+    const articleA = await res1.json()
+    const articleB = await res2.json()
+    const articleAsc = await res3.json()
+    const articleDesc = await res4.json()
 
     return {
         props: {
-            articleA : JSON.parse(JSON.stringify(articleA)),
-            articleB : JSON.parse(JSON.stringify(articleB)),
-            articleAsc : JSON.parse(JSON.stringify(articleAsc)),
-            articleDes : JSON.parse(JSON.stringify(articleDesc)),
+            articleA,
+            articleB,
+            articleAsc,
+            articleDesc
         }
     }
 }

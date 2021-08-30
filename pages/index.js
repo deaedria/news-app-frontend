@@ -204,30 +204,37 @@ const Home = (props) => {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const category = {
         limit: 6, page: 1,
         rec1: 1, rec2: 2,
         rec3: 3, rec4: 4
     }
 
-    const categories = await fetcherGet(`${process.env.API_URI}category?limit=${category.limit}&page=${category.page}`)
+    const res1 = await fetcherGet(`${process.env.API_URI}category?limit=${category.limit}&page=${category.page}`)
 
-    const recommend1 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec1}`)
-    const recommend2 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec2}`)
-    const recommend3 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec3}`)
-    const recommend4 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec4}`)
+    const res2 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec1}`)
+    const res3 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec2}`)
+    const res4 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec3}`)
+    const res5 = await fetcherGet(`${process.env.API_URI}category/recommend/${category.rec4}`)
 
-    const latest = await fetcherGet(`${process.env.API_URI}article/latest`)
+    const res6 = await fetcherGet(`${process.env.API_URI}article/latest`)
 
+    const categories = await res1.json()
+    const recommend1 = await res2.json()
+    const recommend2 = await res3.json()
+    const recommend3 = await res4.json()
+    const recommend4 = await res5.json()
+    const latest = await res6.json()
+    
     return {
         props: {
-            categories : JSON.parse(JSON.stringify(categories)),
-            recommend1 : JSON.parse(JSON.stringify(recommend1)),
-            recommend2 : JSON.parse(JSON.stringify(recommend2)),
-            recommend3 : JSON.parse(JSON.stringify(recommend3)),
-            recommend4 : JSON.parse(JSON.stringify(recommend4)),
-            latest : JSON.parse(JSON.stringify(latest))
+            categories,
+            recommend1,
+            recommend2,
+            recommend3,
+            recommend4,
+            latest
         }
     }
 }

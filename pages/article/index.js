@@ -243,21 +243,28 @@ const Article = (props) => {
 
 export async function getStaticProps() {
 
-    const categoriesList1 = await fetcherGet(`${process.env.API_URI}category/list/1`)
-    const categoriesList2 = await fetcherGet(`${process.env.API_URI}category/list/2`)
-    const categoriesList3 = await fetcherGet(`${process.env.API_URI}category/list/3`)
-    const categoriesList4 = await fetcherGet(`${process.env.API_URI}category/list/4`)
-    const categoriesList5 = await fetcherGet(`${process.env.API_URI}category/list/5`)
-    const categoriesList6 = await fetcherGet(`${process.env.API_URI}category/list/6`)
+    const res1 = await fetcherGet(`${process.env.API_URI}category/list/1`)
+    const res2 = await fetcherGet(`${process.env.API_URI}category/list/2`)
+    const res3 = await fetcherGet(`${process.env.API_URI}category/list/3`)
+    const res4 = await fetcherGet(`${process.env.API_URI}category/list/4`)
+    const res5 = await fetcherGet(`${process.env.API_URI}category/list/5`)
+    const res6 = await fetcherGet(`${process.env.API_URI}category/list/6`)
+
+    const categoriesList1 = await res1.json()
+    const categoriesList2 = await res2.json()
+    const categoriesList3 = await res3.json()
+    const categoriesList4 = await res4.json()
+    const categoriesList5 = await res5.json()
+    const categoriesList6 = await res6.json()
 
     return {
         props: {
-            categoriesList1 : JSON.parse(JSON.stringify(categoriesList1)),
-            categoriesList2 : JSON.parse(JSON.stringify(categoriesList2)),
-            categoriesList3 : JSON.parse(JSON.stringify(categoriesList3)),
-            categoriesList4 : JSON.parse(JSON.stringify(categoriesList4)),
-            categoriesList5 : JSON.parse(JSON.stringify(categoriesList5)),
-            categoriesList6 : JSON.parse(JSON.stringify(categoriesList6)),
+            categoriesList1,
+            categoriesList2,
+            categoriesList3,
+            categoriesList4,
+            categoriesList5,
+            categoriesList6
         }
     }
 }

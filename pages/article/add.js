@@ -83,11 +83,13 @@ const Article = (props) => {
 
 export async function getStaticProps() {
 
-    const categoriesList = await fetcherGet(`${process.env.API_URI}category`)
+    const res1 = await fetcherGet(`${process.env.API_URI}category`)
+
+    const categoriesList = await res1.json()
 
     return {
         props: {
-            categoriesList : JSON.parse(JSON.stringify(categoriesList)),
+            categoriesList
         }
     }
 }

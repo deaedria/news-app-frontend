@@ -104,11 +104,13 @@ const Article = (props) => {
 
 export async function getStaticProps() {
 
-    const articleLastModified = await fetcherGet(`${process.env.API_URI}article/modified`)
+    const res1 = await fetcherGet(`${process.env.API_URI}article/modified`)
+
+    const articleLastModified = await res1.json()
 
     return {
         props: {
-            articleLastModified : JSON.parse(JSON.stringify(articleLastModified)),
+            articleLastModified
         }
     }
 }
