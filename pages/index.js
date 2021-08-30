@@ -37,7 +37,7 @@ const Home = (props) => {
             <Title />
             <Navbar userToken={userToken}></Navbar>
 
-            <section className="sc-home-one">
+            <section className="sc-home-one d-none d-lg-block">
                 <div className="row container">
                     <div className="col-md-6 sc-left">
                         <h1 className="headline-home">Share Information and Educate People</h1>
@@ -51,7 +51,7 @@ const Home = (props) => {
                 </div>
             </section>
 
-            <section className="sc-home-two mt-5">
+            <section className="sc-home-two">
                 <div className="sc-two-top container">
                     <div className="tag-wrap">
                         <h5>Popular Tags</h5>
@@ -64,7 +64,6 @@ const Home = (props) => {
                     </div>
                     <div className="mt-2 d-flex row text-center sc-two">
                         {newsCategory && newsCategory.map(item => (
-
                             <div className="col-md-2 box-category">
                                 <Image src={`${process.env.PUBLIC_URI}${item.category_cover}`} alt="category" width={190} height={210} />
                                 <h6>{item.category_name}</h6>
@@ -72,14 +71,14 @@ const Home = (props) => {
                         ))}
 
                     </div>
-                    <div className="d-flex mt-3 justify-content-between wrap-recommend">
+                    <div className="d-flex mt-4 justify-content-between wrap-recommend">
                         <h5>Recommended</h5>
                         <a href="#">More</a>
                     </div>
                     <div className="mt-2 d-flex mb-5 row text-left sc-three">
                         {newsRecommend1 && newsRecommend1.map(item => (
-                            <Link href={`/article/detail?id=${item.id}`}>
-                                <a className="col-md-3">
+                            <Link href={`/article/${item.id}`}>
+                                <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box">
                                         <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
                                         <div className="article-right pt-2">
@@ -97,8 +96,8 @@ const Home = (props) => {
                             </Link>
                         ))}
                         {newsRecommend2 && newsRecommend2.map(item => (
-                            <Link href={`/article/detail?id=${item.id}`}>
-                                <a className="col-md-3">
+                            <Link href={`/article/${item.id}`}>
+                                <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box home-b1">
                                         <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
                                         <div className="article-right pt-2">
@@ -116,8 +115,8 @@ const Home = (props) => {
                             </Link>
                         ))}
                         {newsRecommend3 && newsRecommend3.map(item => (
-                            <Link href={`/article/detail?id=${item.id}`}>
-                                <a className="col-md-3">
+                            <Link href={`/article/${item.id}`}>
+                                <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box home-b2">
                                         <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
                                         <div className="article-right pt-2">
@@ -135,8 +134,8 @@ const Home = (props) => {
                             </Link>
                         ))}
                         {newsRecommend4 && newsRecommend4.map(item => (
-                            <Link href={`/article/detail?id=${item.id}`}>
-                                <a className="col-md-3">
+                            <Link href={`/article/${item.id}`}>
+                                <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box home-b3">
                                         <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
                                         <div className="article-right pt-2">
@@ -158,7 +157,7 @@ const Home = (props) => {
                 </div>
             </section>
 
-            <section className="sc-home-three">
+            <section className="sc-home-three d-none d-md-block">
                 <div className="row container">
                     <div className="col-md-6 sc-left-one">
                         <h1 className="headline-home">Let's hear about Kayla's success story</h1>
@@ -178,7 +177,7 @@ const Home = (props) => {
                     </div>
                     <div className="mt-2 mb-5 row text-left sc-four">
                         {latestArticle && latestArticle.map(item => (
-                            <Link href={`/article/detail?id=${item.id}`}>
+                            <Link href={`/article/${item.id}`}>
                                 <a className="col-md-4">
                                     <div className="mt-3 d-flex article-box">
                                         <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />

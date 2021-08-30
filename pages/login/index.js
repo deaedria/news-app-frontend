@@ -35,7 +35,7 @@ const Login = () => {
                         <Title />
                         <div className="container-fluid px-0">
                             <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-6 d-none d-md-block">
                                     <img className="cover-mega" alt="cover" src="/image/image-1.png" />
                                 </div>
                                 <div className="col-md-6 right-wrap">
