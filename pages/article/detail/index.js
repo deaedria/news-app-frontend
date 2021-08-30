@@ -167,19 +167,25 @@ const Article = ({ newsDetail }) => {
     )
 }
 
-export async function getStaticPaths() {
-    const newsDetail = await fetcherGet(`${process.env.API_URI}article`)
+// export async function getStaticPaths() {
+//     const newsDetail = await fetcherGet(`${process.env.API_URI}article`)
 
-    const paths = newsDetail.map((data) => ({
-        params: { id: data.id.toString() },
-    }))
+//     const paths = newsDetail.map((data) => ({
+//         params: { id: data.id.toString() },
+//     }))
 
-    return { paths, fallback: false }
-}
+//     return { paths, fallback: false }
+// }
 
-export async function getStaticProps({ params }) {
-    const newsDetail = await fetcherGet(`${process.env.API_URI}article/${params.id}`)
+// export async function getStaticProps({ params }) {
+//     const newsDetail = await fetcherGet(`${process.env.API_URI}article/${params.id}`)
 
+//     return { props: { newsDetail } }
+// }
+
+export async function getServerSideProps({query}) {
+    const newsDetail = await fetcherGet(`${process.env.API_URI}article/${query.id}`)
+    
     return { props: { newsDetail } }
 }
 

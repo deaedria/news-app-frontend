@@ -84,7 +84,7 @@ const Article = (props) => {
                         </div>
                         {newsCategory1.article.map((data, index) => {
                             return (
-                                <Link href={`/article/${data.id}`}>
+                                <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
                                             <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
@@ -109,7 +109,7 @@ const Article = (props) => {
                         </div>
                         {newsCategory2.article.map((data, index) => {
                             return (
-                                <Link href={`/article/${data.id}`}>
+                                <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
                                             <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
@@ -134,7 +134,7 @@ const Article = (props) => {
                         </div>
                         {newsCategory3.article.map((data, index) => {
                             return (
-                                <Link href={`/article/${data.id}`}>
+                                <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
                                             <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
@@ -159,7 +159,7 @@ const Article = (props) => {
                         </div>
                         {newsCategory4.article.map((data, index) => {
                             return (
-                                <Link href={`/article/${data.id}`}>
+                                <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
                                             <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
@@ -184,7 +184,7 @@ const Article = (props) => {
                         </div>
                         {newsCategory5.article.map((data, index) => {
                             return (
-                                <Link href={`/article/${data.id}`}>
+                                <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 col-md-4 d-flex article-box .box-2">
                                             <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
@@ -209,7 +209,7 @@ const Article = (props) => {
                         </div>
                         {newsCategory6.article.map((data, index) => {
                             return (
-                                <Link href={`/article/${data.id}`}>
+                                <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 col-md-4 d-flex article-box .box-2">
                                             <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />

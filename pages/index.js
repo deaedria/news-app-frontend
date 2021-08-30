@@ -77,7 +77,7 @@ const Home = (props) => {
                     </div>
                     <div className="mt-2 d-flex mb-5 row text-left sc-three">
                         {newsRecommend1 && newsRecommend1.map(item => (
-                            <Link href={`/article/${item.id}`}>
+                            <Link href={`/article/detail/?id=${item.id}`}>
                                 <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box">
                                         <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
@@ -96,7 +96,7 @@ const Home = (props) => {
                             </Link>
                         ))}
                         {newsRecommend2 && newsRecommend2.map(item => (
-                            <Link href={`/article/${item.id}`}>
+                            <Link href={`/article/detail/?id=${item.id}`}>
                                 <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box home-b1">
                                         <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
@@ -115,7 +115,7 @@ const Home = (props) => {
                             </Link>
                         ))}
                         {newsRecommend3 && newsRecommend3.map(item => (
-                            <Link href={`/article/${item.id}`}>
+                            <Link href={`/article/detail/?id=${item.id}`}>
                                 <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box home-b2">
                                         <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
@@ -134,7 +134,7 @@ const Home = (props) => {
                             </Link>
                         ))}
                         {newsRecommend4 && newsRecommend4.map(item => (
-                            <Link href={`/article/${item.id}`}>
+                            <Link href={`/article/detail/?id=${item.id}`}>
                                 <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box home-b3">
                                         <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
@@ -177,7 +177,7 @@ const Home = (props) => {
                     </div>
                     <div className="mt-2 mb-5 row text-left sc-four">
                         {latestArticle && latestArticle.map(item => (
-                            <Link href={`/article/${item.id}`}>
+                            <Link href={`/article/detail/?id=${item.id}`}>
                                 <a className="col-md-4">
                                     <div className="mt-3 d-flex article-box">
                                         <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
