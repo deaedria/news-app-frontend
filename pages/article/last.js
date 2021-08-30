@@ -108,7 +108,7 @@ export async function getStaticProps() {
 
     return {
         props: {
-            articleLastAdded
+            articleLastAdded : JSON.parse(JSON.stringify(articleLastAdded)),
         }
     }
 }

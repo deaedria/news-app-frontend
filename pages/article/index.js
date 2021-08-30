@@ -252,12 +252,12 @@ export async function getStaticProps() {
 
     return {
         props: {
-            categoriesList1,
-            categoriesList2,
-            categoriesList3,
-            categoriesList4,
-            categoriesList5,
-            categoriesList6
+            categoriesList1 : JSON.parse(JSON.stringify(categoriesList1)),
+            categoriesList2 : JSON.parse(JSON.stringify(categoriesList2)),
+            categoriesList3 : JSON.parse(JSON.stringify(categoriesList3)),
+            categoriesList4 : JSON.parse(JSON.stringify(categoriesList4)),
+            categoriesList5 : JSON.parse(JSON.stringify(categoriesList5)),
+            categoriesList6 : JSON.parse(JSON.stringify(categoriesList6)),
         }
     }
 }

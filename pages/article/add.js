@@ -87,7 +87,7 @@ export async function getStaticProps() {
 
     return {
         props: {
-            categoriesList
+            categoriesList : JSON.parse(JSON.stringify(categoriesList)),
         }
     }
 }

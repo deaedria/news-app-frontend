@@ -107,7 +107,7 @@ export async function getStaticProps() {
 
     return {
         props: {
-            articleSearch
+            articleSearch : JSON.parse(JSON.stringify(articleSearch)),
         }
     }
 }

@@ -197,10 +197,10 @@ export async function getStaticProps() {
 
     return {
         props: {
-            articleA,
-            articleB,
-            articleAsc,
-            articleDesc
+            articleA : JSON.parse(JSON.stringify(articleA)),
+            articleB : JSON.parse(JSON.stringify(articleB)),
+            articleAsc : JSON.parse(JSON.stringify(articleAsc)),
+            articleDes : JSON.parse(JSON.stringify(articleDesc)),
         }
     }
 }
