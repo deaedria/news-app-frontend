@@ -83,9 +83,7 @@ const Article = (props) => {
 
 export async function getServerSideProps() {
 
-    const res1 = await fetcherGet(`${process.env.API_URI}category`)
-
-    const categoriesList = await res1.json()
+    const categoriesList = await fetcherGet(`${process.env.API_URI}category`)
 
     return {
         props: {
