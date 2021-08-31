@@ -65,7 +65,7 @@ const Profile = (props) => {
                                         <div className="d-flex">
                                             {photo ? (
                                                 <div className="wrap-pp align-self-center">
-                                                    <Image id="image-l" src={`https://newstoday-server.herokuapp.com${userProfile1.photo_profile}`} alt="profile" width={66} height={66} />
+                                                    <Image id="image-l" src={`${process.env.PUBLIC_URI}${userProfile1.photo_profile}`} alt="profile" width={66} height={66} />
                                                 </div>
                                             ) : (
                                                 <div className="wrap-pp align-self-center">
@@ -146,7 +146,7 @@ const Profile = (props) => {
                                     <div className="d-flex justify-content-between sc-profile-right">
                                         {photo ? (
                                             <div className="image-center">
-                                                <Image id="image-r" src={`https://newstoday-server.herokuapp.com${userProfile1.photo_profile}`} alt="profile" width={90} height={90} />
+                                                <Image id="image-r" src={`${process.env.PUBLIC_URI}${userProfile1.photo_profile}`} alt="profile" width={90} height={90} />
                                             </div>
                                         ) : (
                                             <div className="image-center">

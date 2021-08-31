@@ -9,12 +9,12 @@ import { fetcherGet } from '../../lib/fetcher'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
 
-const Article = () => {
+const Article = (props) => {
     const { userToken } = useAuth()
     const Router = useRouter()
 
     let title = Router.query.title
-    const { data: newsResult, error } = useSWR(`${process.env.API_URI}article/search?title=${title}`, fetcherGet)
+    const { data: newsResult, error } = useSWR(`${process.env.API_URI}article/search?title=${title}`, fetcherGet, { initialData: props.articleSearch })
 
     return (
         <div>
@@ -66,7 +66,7 @@ const Article = () => {
                                 <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
-                                            <Image src={`https://newstoday-server.herokuapp.com${data.article_cover}`} alt="category" width={190} height={190} />
+                                            <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
                                             <div className="article-right pt-2">
                                                 <h6 className="title">{data.article_title}</h6>
                                                 {/* <div className="article-info mb-2">
@@ -101,11 +101,9 @@ const Article = () => {
     )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({query}) {
 
-    const res1 = await fetcherGet(`${process.env.API_URI}article`)
-
-    const articleSearch = await res1.json()
+    const articleSearch = await fetcherGet(`${process.env.API_URI}article/search?title=${query.title}`)
 
     return {
         props: {

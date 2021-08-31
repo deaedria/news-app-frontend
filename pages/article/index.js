@@ -87,7 +87,7 @@ const Article = (props) => {
                                 <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
-                                            <Image src={`https://newstoday-server.herokuapp.com${data.article_cover}`} alt="category" width={190} height={190} />
+                                            <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
                                             <div className="article-right pt-2" >
                                                 <h6 className="title">{data.article_title}</h6>
                                                 {/* <div className="article-info mb-2">
@@ -112,7 +112,7 @@ const Article = (props) => {
                                 <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
-                                            <Image src={`https://newstoday-server.herokuapp.com${data.article_cover}`} alt="category" width={190} height={190} />
+                                            <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
                                             <div className="article-right pt-2">
                                                 <h6 className="title">{data.article_title}</h6>
                                                 {/* <div className="article-info mb-2">
@@ -137,7 +137,7 @@ const Article = (props) => {
                                 <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
-                                            <Image src={`https://newstoday-server.herokuapp.com${data.article_cover}`} alt="category" width={190} height={190} />
+                                            <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
                                             <div className="article-right pt-2">
                                                 <h6 className="title">{data.article_title}</h6>
                                                 {/* <div className="article-info mb-2">
@@ -162,7 +162,7 @@ const Article = (props) => {
                                 <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 d-flex article-box .box-2">
-                                            <Image src={`https://newstoday-server.herokuapp.com${data.article_cover}`} alt="category" width={190} height={190} />
+                                            <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
                                             <div className="article-right pt-2">
                                                 <h6 className="title">{data.article_title}</h6>
                                                 {/* <div className="article-info mb-2">
@@ -187,7 +187,7 @@ const Article = (props) => {
                                 <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 col-md-4 d-flex article-box .box-2">
-                                            <Image src={`https://newstoday-server.herokuapp.com${data.article_cover}`} alt="category" width={190} height={190} />
+                                            <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
                                             <div className="article-right pt-2">
                                                 <h6 className="title">{data.article_title}</h6>
                                                 {/* <div className="article-info mb-2">
@@ -212,7 +212,7 @@ const Article = (props) => {
                                 <Link href={`/article/detail/?id=${data.id}`}>
                                     <a className="col-md-4">
                                         <div className="mt-3 col-md-4 d-flex article-box .box-2">
-                                            <Image src={`https://newstoday-server.herokuapp.com${data.article_cover}`} alt="category" width={190} height={190} />
+                                            <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
                                             <div className="article-right pt-2">
                                                 <h6 className="title">{data.article_title}</h6>
                                                 {/* <div className="article-info mb-2">
@@ -243,19 +243,12 @@ const Article = (props) => {
 
 export async function getServerSideProps() {
 
-    const res1 = await fetcherGet(`${process.env.API_URI}category/list/1`)
-    const res2 = await fetcherGet(`${process.env.API_URI}category/list/2`)
-    const res3 = await fetcherGet(`${process.env.API_URI}category/list/3`)
-    const res4 = await fetcherGet(`${process.env.API_URI}category/list/4`)
-    const res5 = await fetcherGet(`${process.env.API_URI}category/list/5`)
-    const res6 = await fetcherGet(`${process.env.API_URI}category/list/6`)
-
-    const categoriesList1 = await res1.json()
-    const categoriesList2 = await res2.json()
-    const categoriesList3 = await res3.json()
-    const categoriesList4 = await res4.json()
-    const categoriesList5 = await res5.json()
-    const categoriesList6 = await res6.json()
+    const categoriesList1 = await fetcherGet(`${process.env.API_URI}category/list/1`)
+    const categoriesList2 = await fetcherGet(`${process.env.API_URI}category/list/2`)
+    const categoriesList3 = await fetcherGet(`${process.env.API_URI}category/list/3`)
+    const categoriesList4 = await fetcherGet(`${process.env.API_URI}category/list/4`)
+    const categoriesList5 = await fetcherGet(`${process.env.API_URI}category/list/5`)
+    const categoriesList6 = await fetcherGet(`${process.env.API_URI}category/list/6`)
 
     return {
         props: {

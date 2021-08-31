@@ -98,7 +98,7 @@ const Article = (props) => {
                                             <Link href={`/article/detail/?id=${data.id}`}>
                                                 <a className="col-md-4">
                                                     <div className="mt-3 d-flex article-box .box-2">
-                                                        <Image src={`https://newstoday-server.herokuapp.com${data.article_cover}`} alt="category" width={190} height={190} />
+                                                        <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
                                                         <div className="article-right pt-2">
                                                             <h6 className="title">{data.article_title}</h6>
                                                             {/* <div className="article-info mb-2">
@@ -138,7 +138,7 @@ const Article = (props) => {
                                             <Link href={`/article/detail/?id=${data.id}`}>
                                                 <a className="col-md-4">
                                                     <div className="mt-3 col-md-4 d-flex article-box .box-2">
-                                                        <Image src={`https://newstoday-server.herokuapp.com${data.article_cover}`} alt="category" width={190} height={190} />
+                                                        <Image src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
                                                         <div className="article-right pt-2">
                                                             <h6 className="title">{data.article_title}</h6>
                                                             {/* <div className="article-info mb-2">
@@ -190,15 +190,11 @@ export async function getServerSideProps() {
         limit: 6,
         page: 1
     }
-    const res1 = await fetcherGet(`${process.env.API_URI}article/asc`)
-    const res2 = await fetcherGet(`${process.env.API_URI}article/desc`)
-    const res3 = await fetcherGet(`${process.env.API_URI}article/asc?limit=${formPagination.limit}&page=${formPagination.page}`)
-    const res4 = await fetcherGet(`${process.env.API_URI}article/desc?limit=${formPagination.limit}&page=${formPagination.page}`)
 
-    const articleA = await res1.json()
-    const articleB = await res2.json()
-    const articleAsc = await res3.json()
-    const articleDesc = await res4.json()
+    const articleA = await fetcherGet(`${process.env.API_URI}article/asc`)
+    const articleB = await fetcherGet(`${process.env.API_URI}article/desc`)
+    const articleAsc = await fetcherGet(`${process.env.API_URI}article/asc?limit=${formPagination.limit}&page=${formPagination.page}`)
+    const articleDesc = await fetcherGet(`${process.env.API_URI}article/desc?limit=${formPagination.limit}&page=${formPagination.page}`)
 
     return {
         props: {
