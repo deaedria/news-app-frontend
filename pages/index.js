@@ -14,7 +14,7 @@ const Home = ({ newsCategory, newsRecommend1, newsRecommend2, newsRecommend3, ne
     const { userToken, mutate } = useAuth()
     const Router = useRouter()
 
-    console.log(newsCategory)
+    // console.log(newsCategory)
 
     const category = {
         limit: 6, page: 1,
@@ -67,7 +67,7 @@ const Home = ({ newsCategory, newsRecommend1, newsRecommend2, newsRecommend3, ne
                     <div className="mt-2 d-flex row text-center sc-two">
                         {newsCategory && newsCategory.map(item => (
                             <div className="col-md-2 box-category">
-                                <Image src={`${process.env.PUBLIC_URI}${item.category_cover}`} alt="category" width={190} height={210} />
+                                <Image src={`${process.env.NEXT_IMAGE_ALLOWED_DOMAINS}${item.category_cover}`} alt="category" width={190} height={210} />
                                 <h6>{item.category_name}</h6>
                             </div>
                         ))}
