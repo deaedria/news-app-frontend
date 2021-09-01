@@ -6,8 +6,4 @@ module.exports = {
     images: {
       domains: ['localhost', 'newstoday-server.herokuapp.com']
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 8273856130c7ff9379a91436d6aaadf57de0aa1d
