@@ -4,6 +4,6 @@ module.exports = {
         PUBLIC_URI : process.env.NEXT_PUBLIC_URI,
     },
     images: {
-      domains: ['localhost', process.env.NEXT_IMAGE_ALLOWED_DOMAINS]
+      domains: ['localhost', 'newstoday-server.herokuapp.com']
     }
 }
