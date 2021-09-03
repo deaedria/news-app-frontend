@@ -62,16 +62,22 @@ const Article = ({ newsDetail }) => {
                                 </div>
                                 <div className="col-md-6 sc-right-d">
                                     <h2 className="title-article">{newsDetail.article_title}</h2>
-                                    <p className="name-status">{newsDetail.name} - {newsDetail.role}</p>
+                                    <p className="mt-5 name-status">{newsDetail.name} - {newsDetail.role}</p>
                                     <p className="created-date">{moment(`${newsDetail.publish_date}`, 'YYYYMMDD').format('MMMM Do YYYY')}</p>
-                                    {/* <div className="d-flex">
-                                        <Image src="/icon/like-icon.svg" alt="like" width={25} height={25} />
-                                        <p className="total">2.1k</p>
+                                    <div className="d-flex m-icon">
+                                        <div className="like">
+                                            <Image src="/icon/like-icon.svg" alt="like" width={25} height={25} />
+                                            {/* <span className="total">2.1k</span> */}
+                                        </div>
                                         <Image src="/icon/bookmark.svg" alt="bookmark" width={25} height={25} />
                                     </div>
-                                    <div className="share-a">
-                                        <button>Share Article Link</button>
-                                    </div> */}
+                                    <div className="btn-wrap-dark share-article mt-3">
+                                        <Link href="#">
+                                            <button className="mt-4 w-100 btn btn-lg btn-dark" type="submit">
+                                                Share Article Link
+                                            </button>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                             <div className="article-content mt-4">
@@ -150,7 +156,7 @@ const Article = ({ newsDetail }) => {
                                             // <h6 className="mt-4 no-comment">No comment left</h6>
                                         }
                                     </div>
-                                    <br/><br/>
+                                    <br /><br />
                                 </section>
                             )
                         }
@@ -183,9 +189,9 @@ const Article = ({ newsDetail }) => {
 //     return { props: { newsDetail } }
 // }
 
-export async function getServerSideProps({query}) {
+export async function getServerSideProps({ query }) {
     const newsDetail = await fetcherGet(`${process.env.API_URI}article/${query.id}`)
-    
+
     return { props: { newsDetail } }
 }
 

@@ -42,7 +42,7 @@ const Article = (props) => {
                             <button className="btn-dashed">
                                 <Image src="/icon/plus.svg" width={25} height={25} />
                             </button>
-                            <div className="btn-wrap-dark mt-2">
+                            <div className="btn-wrap-dark cover-photo mt-2">
                                 <Link href="#">
                                     <button className="w-100 btn btn-lg btn-dark wrap" type="submit">
                                         Choose Cover Photo
@@ -55,7 +55,7 @@ const Article = (props) => {
                                 <div className="col-md-6">
                                     <input className="input-article" placeholder="Article Title"></input>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="select-wrapper col-md-6">
                                     <select className="input-article">
                                         <option value="" disabled selected>Article Category</option>
                                         {newsCategory.map((data) => {

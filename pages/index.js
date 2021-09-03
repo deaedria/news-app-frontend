@@ -67,7 +67,7 @@ const Home = ({ newsCategory, newsRecommend1, newsRecommend2, newsRecommend3, ne
                     <div className="mt-2 d-flex row text-center sc-two">
                         {newsCategory && newsCategory.map(item => (
                             <div className="col-md-2 box-category">
-                                <Image src={`${process.env.PUBLIC_URI}${item.category_cover}`} alt="category" width={190} height={210} />
+                                <Image className="category-cover-b" src={`${process.env.PUBLIC_URI}${item.category_cover}`} alt="category" width={190} height={210} />
                                 <h6>{item.category_name}</h6>
                             </div>
                         ))}
@@ -81,7 +81,7 @@ const Home = ({ newsCategory, newsRecommend1, newsRecommend2, newsRecommend3, ne
                             <Link href={`/article/detail/?id=${item.id}`}>
                                 <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box">
-                                        <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
+                                        <Image className="article-cover-b" src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
                                         <div className="article-right pt-2">
                                             <h6 className="title">{item.article_title}</h6>
                                             {/* <div className="article-info mb-2">
@@ -100,7 +100,7 @@ const Home = ({ newsCategory, newsRecommend1, newsRecommend2, newsRecommend3, ne
                             <Link href={`/article/detail/?id=${item.id}`}>
                                 <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box home-b1">
-                                        <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
+                                        <Image className="article-cover-b" src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
                                         <div className="article-right pt-2">
                                             <h6 className="title">{item.article_title}</h6>
                                             {/* <div className="article-info mb-2">
@@ -119,7 +119,7 @@ const Home = ({ newsCategory, newsRecommend1, newsRecommend2, newsRecommend3, ne
                             <Link href={`/article/detail/?id=${item.id}`}>
                                 <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box home-b2">
-                                        <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
+                                        <Image className="article-cover-b" src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
                                         <div className="article-right pt-2">
                                             <h6 className="title">{item.article_title}</h6>
                                             {/* <div className="article-info mb-2">
@@ -138,7 +138,7 @@ const Home = ({ newsCategory, newsRecommend1, newsRecommend2, newsRecommend3, ne
                             <Link href={`/article/detail/?id=${item.id}`}>
                                 <a className="col-sm-12 col-md-3">
                                     <div className="d-flex article-box home-b3">
-                                        <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
+                                        <Image className="article-cover-b" src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
                                         <div className="article-right pt-2">
                                             <h6 className="title">{item.article_title}</h6>
                                             {/* <div className="article-info mb-2">
@@ -181,7 +181,7 @@ const Home = ({ newsCategory, newsRecommend1, newsRecommend2, newsRecommend3, ne
                             <Link href={`/article/detail/?id=${item.id}`}>
                                 <a className="col-md-4">
                                     <div className="mt-3 d-flex article-box">
-                                        <Image src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
+                                        <Image className="article-cover-b" src={`${process.env.PUBLIC_URI}${item.article_cover}`} alt="category" width={190} height={190} />
                                         <div className="article-right pt-2">
                                             <h6 className="title">{item.article_title}</h6>
                                             {/* <div className="article-info mb-2">

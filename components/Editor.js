@@ -32,7 +32,7 @@ export default class ArticleEditor extends Component {
         const { editorState } = this.state;
         return (
             <div>
-                <div className="mt-3 box-editor btn-add">
+                <div className="mt-3 box-editor btn-add top">
                     <Editor
                         editorState={editorState}
                         toolbarClassName="toolbar-class"
@@ -49,7 +49,7 @@ export default class ArticleEditor extends Component {
                     />
 
                     {/* <button onClick={this.onSave}>Save</button> */}
-                    <button className="w-100 btn btn-lg btn-primary btn-wrap mt-2" type="submit" onClick={this.onSave}>Publish Article</button>
+                    <button className="w-100 btn btn-lg btn-primary btn-wrap mt-2 publish-article" type="submit" onClick={this.onSave}>Publish Article</button>
 
                 </div>
                 {/* <Editor 
