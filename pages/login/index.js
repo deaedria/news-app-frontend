@@ -19,10 +19,12 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = { email, password };
+        setLoading(false)
         fetcherAuth(data)
         mutate()
     };
@@ -49,12 +51,13 @@ const Login = () => {
                                             <label htmlFor="pwd">Password:</label>
                                             <input placeholder="Enter your password" type="password" className="form-control" id="pwd" required onChange={(e) => setPassword(e.target.value)} />
                                         </div>
-                                        {!loadingAuth && (
+                                        {!loading ? (
                                             <button className="w-100 btn btn-lg btn-primary btn-wrap mt-2" type="submit">Loading...</button>
-                                        )}
-                                        {loadingAuth && (
+                                        ) : loadingAuth ? (
                                             <button className="w-100 btn btn-lg btn-primary btn-wrap mt-2" type="submit" onSubmit={handleSubmit}>Login</button>
-                                        )}
+                                        ) :
+                                            <button className="w-100 btn btn-lg btn-primary btn-wrap mt-2" type="submit">Loading...</button>
+                                        }
                                     </form>
                                     <div className="btm-wrap">
                                         <div className="other-opt">
