@@ -5,49 +5,31 @@ import Title from '../../../components/Title'
 import Footer from '../../../components/Footer'
 import Navbar from '../../../components/Navbar'
 import useAuth from "../../../lib/useAuth";
-import { fetcherGet, fetcherCreate } from '../../../lib/fetcher'
+import { fetcherGet } from '../../../lib/fetcher'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import moment from 'moment'
 import jwt from "jwt-decode";
+import Comment from "../../../components/Comment";
 
 const Article = ({ newsDetail }) => {
     const { userToken } = useAuth()
     const Router = useRouter()
-
-    let { id } = Router.query
-    const { data: newsComment } = useSWR(`${process.env.API_URI}comment/list/${id}`, fetcherGet)
 
     if (userToken) {
         const dataUser = jwt(userToken.user)
 
         var { data, error } = useSWR(`${process.env.API_URI}users/${dataUser.id}`, fetcherGet)
         var loading = !data
-
-        var [formData, setFormData] = useState({
-            sender_id: dataUser?.id,
-            receiver_id: newsDetail?.author_id,
-            comment: '',
-            article_id: parseInt(id)
-        })
     }
 
     const photo = data?.photo_profile
 
-
-    const onKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            fetcherCreate(`${process.env.API_URI}comment`, formData)
-            window.location.reload()
-        }
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        fetcherCreate(`${process.env.API_URI}comment`, formData)
-        window.location.reload()
-    };
+    var { id } = Router.query
+    const { data: newsComment } = useSWR(`${process.env.API_URI}comment/list/${id}`, fetcherGet)
+    // const loading = !newsDetail
+    // console.log(newsComment)
+    // console.log(loading)
 
     return (
         <div>
@@ -119,13 +101,12 @@ const Article = ({ newsDetail }) => {
                                             <div className="my-photo">
                                                 <Image src={`${process.env.PUBLIC_URI}${data?.photo_profile}`} alt="profile" width={50} height={50} />
                                             </div>
-                                            <form className="comment-r" onSubmit={handleSubmit}>
+                                            <Comment dataName={data.name} userToken={userToken} receiverId={newsDetail.author_id} articleId={id} />
+                                            {/* <div className="comment-r">
                                                 <h6>{data.name}</h6>
-                                                <input placeholder="Leave a comment" type="text" required onInput={(e) => {
-                                                    setFormData({ ...formData, comment: e.target.value })
-                                                }} onKeyPress={(e) => onKeyPress(e)} />
-                                                <span><button type="sumbit" onSubmit={handleSubmit}>Submit</button></span>
-                                            </form>
+                                                <input placeholder="Leave a comment" type="text" required />
+                                                <span><button type="sumbit">Submit</button></span>
+                                            </div> */}
                                         </div>
                                         <div className="col-md-7 comment-list mt-4">
                                             {!newsComment ? (
