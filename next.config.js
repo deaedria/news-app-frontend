@@ -1,7 +1,5 @@
 module.exports = {
-  generateBuildId: async () => {
-    return 'build'
-  },
+  generateBuildId: () => 'build',
   env: {
     API_URI: process.env.NEXT_API_URI,
     PUBLIC_URI: process.env.NEXT_PUBLIC_URI,
