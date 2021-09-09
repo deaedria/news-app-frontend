@@ -12,7 +12,7 @@ import moment from 'moment'
 import jwt from "jwt-decode";
 import Comment from "../../../components/Comment";
 
-const Article = ({ newsDetail }) => {
+const Article = ({ newsDetail, newsComment }) => {
     const { userToken } = useAuth()
     const Router = useRouter()
 
@@ -26,10 +26,12 @@ const Article = ({ newsDetail }) => {
     const photo = data?.photo_profile
 
     var { id } = Router.query
-    const { data: newsComment } = useSWR(`${process.env.API_URI}comment/list/${id}`, fetcherGet)
+    const { data: newsComment1 } = useSWR(`${process.env.API_URI}comment/list/${id}`, fetcherGet, { initialData: newsComment })
+    const { data: newsDetail1 } = useSWR(`${process.env.API_URI}article/${id}`, fetcherGet, { initialData: newsDetail })
     // const loading = !newsDetail
-    // console.log(newsComment)
-    // console.log(loading)
+    // console.log(newsComment1)
+    // console.log(newsDetail1)
+
 
     return (
         <div>
@@ -59,12 +61,12 @@ const Article = ({ newsDetail }) => {
                         <section className="container mt-5">
                             <div className="row">
                                 <div className="col-md-6 sc-left-d">
-                                    <Image src={`${process.env.PUBLIC_URI}${newsDetail.article_cover}`} alt="cover article" width={680} height={400} />
+                                    <Image src={`${process.env.PUBLIC_URI}${newsDetail1.article_cover}`} alt="cover article" width={680} height={400} />
                                 </div>
                                 <div className="col-md-6 sc-right-d">
-                                    <h2 className="title-article">{newsDetail.article_title}</h2>
-                                    <p className="mt-5 name-status">{newsDetail.name} - {newsDetail.role}</p>
-                                    <p className="created-date">{moment(`${newsDetail.publish_date}`, 'YYYYMMDD').format('MMMM Do YYYY')}</p>
+                                    <h2 className="title-article">{newsDetail1.article_title}</h2>
+                                    <p className="mt-5 name-status">{newsDetail1.name} - {newsDetail1.role}</p>
+                                    <p className="created-date">{moment(`${newsDetail1.publish_date}`, 'YYYYMMDD').format('MMMM Do YYYY')}</p>
                                     <div className="d-flex m-icon">
                                         <div className="like">
                                             <Image src="/icon/like-icon.svg" alt="like" width={25} height={25} />
@@ -85,7 +87,7 @@ const Article = ({ newsDetail }) => {
                                 <div className="row">
                                     <div className="col-md-12">
                                         <p className="p-1">
-                                            {newsDetail.article_content}
+                                            {newsDetail1.article_content}
                                         </p>
                                     </div>
                                 </div>
@@ -109,11 +111,10 @@ const Article = ({ newsDetail }) => {
                                             </div> */}
                                         </div>
                                         <div className="col-md-7 comment-list mt-4">
-                                            {!newsComment ? (
+                                            {newsComment1 == 'Request failed with status code 400' ? (
                                                 <div><h6 className="mt-4 no-comment">No comment yet</h6></div>
-                                            )
-                                                :
-                                                newsComment.map((item) => {
+                                            ) : (
+                                                newsComment1 && newsComment1.map((item) => {
                                                     return (
                                                         <div className="d-flex list-c">
                                                             <div className="my-photo">
@@ -125,7 +126,7 @@ const Article = ({ newsDetail }) => {
                                                             </div>
                                                         </div>
                                                     )
-                                                })
+                                                }))
                                                 // <h6 className="mt-4 no-comment">No comment left</h6>
                                             }
                                         </div>
@@ -138,11 +139,10 @@ const Article = ({ newsDetail }) => {
                                 <section className="container sc-comment">
                                     <h5>Comment</h5>
                                     <div className="col-md-7 comment-list mt-4">
-                                        {!newsComment ? (
+                                        {newsComment1 == 'Request failed with status code 400' ? (
                                             <div><h6 className="mt-4 no-comment">No comment yet</h6></div>
-                                        )
-                                            :
-                                            newsComment.map((item) => {
+                                        ) : (
+                                            newsComment1 && newsComment1.map((item) => {
                                                 return (
                                                     <div className="d-flex list-c">
                                                         <div className="my-photo">
@@ -154,7 +154,7 @@ const Article = ({ newsDetail }) => {
                                                         </div>
                                                     </div>
                                                 )
-                                            })
+                                            }))
                                             // <h6 className="mt-4 no-comment">No comment left</h6>
                                         }
                                     </div>
@@ -193,8 +193,9 @@ const Article = ({ newsDetail }) => {
 
 export async function getServerSideProps({ query }) {
     const newsDetail = await fetcherGet(`${process.env.API_URI}article/${query.id}`)
+    const newsComment = await fetcherGet(`${process.env.API_URI}comment/list/${query.id}`)
 
-    return { props: { newsDetail } }
+    return { props: { newsDetail, newsComment } }
 }
 
 export default Article

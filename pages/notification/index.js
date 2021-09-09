@@ -106,7 +106,7 @@ const Notification = () => {
                                     <br /><br />
                                 </div>
                             ) : (
-                                newsResult && newsResult.map((data) => {
+                                userNotif && userNotif.map((item) => {
                                     return (
                                         <div>
                                             <div className="d-flex mt-3 justify-content-between">
