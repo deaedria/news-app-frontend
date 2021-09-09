@@ -13,7 +13,7 @@ import { useRouter } from 'next/router'
 const Profile = (props) => {
     const { userToken, mutate } = useAuth()
     const Router = useRouter()
-    
+
     const { id } = Router.query
     const { data: userProfile1 } = useSWR(`${process.env.API_URI}users/${id}`, fetcherGet, { initialData: props.profile })
     let loading = !userProfile1
@@ -88,57 +88,67 @@ const Profile = (props) => {
                                         <h6 className="mt-3">About me</h6>
                                         <p className="p-btm">{userProfile1.about && userProfile1.about !== 'null' ? userProfile1.about || userProfile1?.about : '-'}</p>
                                     </div>
-                                    <div className="card-btm mt-4">
-                                        <div className="d-flex justify-content-between box-list-p">
-                                            <div className="list-l">
-                                                <Link href="/profile">
-                                                    <a>Edit Profile</a>
-                                                </Link>
+                                    <div className="card-btm">
+                                        <button type="button" className={Router?.pathname.includes("/profile") ? "btn btn-profile shadow-none active" : "btn btn-profile shadow-none"}>
+                                            <div className="d-flex justify-content-between box-list-p">
+                                                <div className="list-l">
+                                                    <Link href="/profile">
+                                                        <a>Edit Profile</a>
+                                                    </Link>
+                                                </div>
+                                                <div className="list-r">
+                                                    <Image src="/icon/angle-right.svg" width={20} height={20} />
+                                                </div>
                                             </div>
-                                            <div className="list-r">
-                                                <Image src="/icon/angle-right.svg" width={20} height={20} />
+                                        </button>
+                                        <button type="button" className="btn btn-profile shadow-none">
+                                            <div className="d-flex justify-content-between box-list-p">
+                                                <div className="list-l">
+                                                    <Link href="#">
+                                                        <a>Saved Post</a>
+                                                    </Link>
+                                                </div>
+                                                <div className="list-r">
+                                                    <Image src="/icon/angle-right.svg" width={20} height={20} />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="d-flex justify-content-between box-list-p">
-                                            <div className="list-l">
-                                                <Link href="#">
-                                                    <a>Saved Post</a>
-                                                </Link>
+                                        </button>
+                                        <button type="button" className="btn btn-profile shadow-none">
+                                            <div className="d-flex justify-content-between box-list-p">
+                                                <div className="list-l">
+                                                    <Link href="#">
+                                                        <a>FAQ</a>
+                                                    </Link>
+                                                </div>
+                                                <div className="list-r">
+                                                    <Image src="/icon/angle-right.svg" width={20} height={20} />
+                                                </div>
                                             </div>
-                                            <div className="list-r">
-                                                <Image src="/icon/angle-right.svg" width={20} height={20} />
+                                        </button>
+                                        <button type="button" className="btn btn-profile shadow-none">
+                                            <div className="d-flex justify-content-between box-list-p">
+                                                <div className="list-l">
+                                                    <Link href="#">
+                                                        <a>Help</a>
+                                                    </Link>
+                                                </div>
+                                                <div className="list-r">
+                                                    <Image src="/icon/angle-right.svg" width={20} height={20} />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="d-flex justify-content-between box-list-p">
-                                            <div className="list-l">
-                                                <Link href="#">
-                                                    <a>FAQ</a>
-                                                </Link>
+                                        </button>
+                                        <button type="button" className="btn btn-profile shadow-none" onClick={() => { let confirm = window.confirm("Are you sure you want to logout?"); if (confirm == true) { fetcherLogout(); mutate(null); Router.replace('/') } }}>
+                                            <div className="d-flex justify-content-between box-list-p">
+                                                <div className="list-l">
+                                                    <Link href="/">
+                                                        <a>Logout</a>
+                                                    </Link>
+                                                </div>
+                                                <div className="list-r">
+                                                    <Image src="/icon/angle-right.svg" width={20} height={20} />
+                                                </div>
                                             </div>
-                                            <div className="list-r">
-                                                <Image src="/icon/angle-right.svg" width={20} height={20} />
-                                            </div>
-                                        </div>
-                                        <div className="d-flex justify-content-between box-list-p">
-                                            <div className="list-l">
-                                                <Link href="#">
-                                                    <a>Help</a>
-                                                </Link>
-                                            </div>
-                                            <div className="list-r">
-                                                <Image src="/icon/angle-right.svg" width={20} height={20} />
-                                            </div>
-                                        </div>
-                                        <div className="d-flex justify-content-between box-list-p">
-                                            <div className="list-l">
-                                                <Link href="/">
-                                                    <a onClick={() => { fetcherLogout(); mutate(null); Router.replace('/') }}>Logout</a>
-                                                </Link>
-                                            </div>
-                                            <div className="list-r">
-                                                <Image src="/icon/angle-right.svg" width={20} height={20} />
-                                            </div>
-                                        </div>
+                                        </button>
                                     </div>
                                 </div>
 
@@ -234,18 +244,18 @@ const Profile = (props) => {
 
 // export async function getStaticPaths() {
 //     const res = await fetcherGet(`${process.env.API_URI}users`)
-    
+
 //     const paths = res.map((user) => ({
 //         params: { id: user.id.toString() },
 //     }))
-    
+
 //     return { paths, fallback: false }
 // }
 
 
-export async function getServerSideProps({query}) {
+export async function getServerSideProps({ query }) {
     const profile = await fetcherGet(`${process.env.API_URI}users/${query.id}`)
-    
+
     return { props: { profile } }
 }
 
