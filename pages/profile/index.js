@@ -37,13 +37,13 @@ const Profile = (props) => {
             if (password == null) {
                 const data = { username, name, email, job, about };
                 fetcherUpdate(`${process.env.API_URI}users/${id}`, data)
-                // alert("Update User Success")
+                alert("Update User Success")
                 setReadOnly(true)
                 window.location.href = `/profile/?id=${id}`
             } else {
                 const data = { username, name, password, email, job, about };
                 fetcherUpdate(`${process.env.API_URI}users/${id}`, data)
-                // alert("Update User Success")
+                alert("Update User Success")
                 setReadOnly(true)
                 window.location.href = `/profile/?id=${id}`
             }

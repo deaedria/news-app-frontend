@@ -16,19 +16,22 @@ const Comment = ({ dataName, userToken, receiverId, articleId }) => {
 
     const onKeyPress = (e) => {
         if (e.key === 'Enter') {
-            e.preventDefault();
-            fetcherCreate(`${process.env.API_URI}comment`, formData)
-            Router.replace(`/article`)
-            Router.replace(`/article/detail/?id=${articleId}`)
+            if (formData.comment != '') {
+                e.preventDefault();
+                fetcherCreate(`${process.env.API_URI}comment`, formData)
+                window.location.href = `/article/detail/?id=${articleId}`
+            }
         }
     }
-    
+
     const handleSubmit = (e) => {
-        e.preventDefault();
-        fetcherCreate(`${process.env.API_URI}comment`, formData)
-        // Router.replace(Router.asPath)
-        Router.replace(`/article`)
-        Router.replace(`/article/detail/?id=${articleId}`)
+        if (formData.comment != '') {
+            e.preventDefault();
+            fetcherCreate(`${process.env.API_URI}comment`, formData)
+            window.location.href = `/article/detail/?id=${articleId}`
+            // Router.replace(`/article`)
+            // Router.replace(`/article/detail/?id=${articleId}`)
+        }
     };
 
     return (
