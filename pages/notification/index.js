@@ -39,7 +39,7 @@ const Notification = () => {
     };
 
     const listId = isChecked.join().split(',')
-    // console.log(listId)
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -50,13 +50,15 @@ const Notification = () => {
             } else if (isChecked?.length == 1) {
                 fetcherDelete(`${process.env.API_URI}notification/remove?id=${listId[0]}`)
                 alert("Delete Notification Success")
-                // window.location.reload()
+                Router.replace(`/`)
+                Router.replace(`/notification?id=${id}`)
             } else if (isChecked?.length > 1) {
                 listId.map((data) => {
                     fetcherDelete(`${process.env.API_URI}notification/remove?id=${data}`)
                 })
                 alert("Delete Notification Success")
-                window.location.reload()
+                Router.replace(`/`)
+                Router.replace(`/notification?id=${id}`)
             }
         }
     };
@@ -94,35 +96,40 @@ const Notification = () => {
                         </div>
 
                         <form>
-                            {!loading ? (
+                            {userNotif == 'Request failed with status code 400' ? (
                                 <div>
-                                    {userNotif.map((item) => (
-                                        <div className="d-flex mt-3 justify-content-between">
-                                            <div className="d-flex notif-list">
-                                                <div className="round-p">
-                                                    <Image id="round-img" src={`${process.env.PUBLIC_URI}${item.photo_profile}`} alt="profile" width={50} height={50} />
+                                    <div className="mt-2">
+                                        <p></p>
+                                        <p></p>
+                                        <br />
+                                    </div>
+                                    <br /><br />
+                                </div>
+                            ) : (
+                                newsResult && newsResult.map((data) => {
+                                    return (
+                                        <div>
+                                            <div className="d-flex mt-3 justify-content-between">
+                                                <div className="d-flex notif-list">
+                                                    <div className="round-p">
+                                                        <Image id="round-img" src={`${process.env.PUBLIC_URI}${item.photo_profile}`} alt="profile" width={50} height={50} />
+                                                    </div>
+                                                    <div className="notif-r">
+                                                        <h6>{item.notif}</h6>
+                                                        <p>{moment(`${item.created_at}`).fromNow()}</p>
+                                                    </div>
                                                 </div>
-                                                <div className="notif-r">
-                                                    <h6>{item.notif}</h6>
-                                                    <p>{moment(`${item.created_at}`).fromNow()}</p>
+                                                <div className="s-checkbox custom-control custom-checkbox">
+                                                    <input type="checkbox" className="custom-control-input" id="select-n" name={item.id} checked={isChecked.includes(parseInt(item.id))} onChange={handleCheck} />
                                                 </div>
                                             </div>
-                                            <div className="s-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" className="custom-control-input" id="select-n" name={item.id} checked={isChecked.includes(parseInt(item.id))} onChange={handleCheck} />
+                                            <div className="d-flex justify-content-center btn-delete">
+                                                <button className="w-50 btn btn-lg btn-primary btn-wrap mt-2" type="submit" onClick={handleSubmit}>Delete Selected Items</button>
                                             </div>
                                         </div>
-                                    ))}
-                                    <div className="d-flex justify-content-center btn-delete">
-                                        <button className="w-50 btn btn-lg btn-primary btn-wrap mt-2" type="submit" onClick={handleSubmit}>Delete Selected Items</button>
-                                    </div>
-                                </div>
-                            )
-                                :
-                                (
-                                    <div></div>
-                                )
-
-                            }
+                                    )
+                                })
+                            )}
                         </form>
                     </section>
                     <br /><br />
