@@ -17,19 +17,21 @@ const Comment = ({ dataName, userToken, receiverId, articleId }) => {
     const onKeyPress = (e) => {
         if (e.key === 'Enter') {
             if (formData.comment != '') {
-                e.preventDefault();
                 fetcherCreate(`${process.env.API_URI}comment`, formData)
-                window.location.href = `/article/detail/?id=${articleId}`
+                alert('Success to comment')
+                e.preventDefault();
+                // Router.push(`/article`)
+                // Router.replace(`/article/detail/?id=${articleId}`)
             }
         }
     }
-
+    
     const handleSubmit = (e) => {
         if (formData.comment != '') {
-            e.preventDefault();
             fetcherCreate(`${process.env.API_URI}comment`, formData)
-            window.location.href = `/article/detail/?id=${articleId}`
-            // Router.replace(`/article`)
+            alert('Success to comment')
+            e.preventDefault();
+            // Router.push(`/article`)
             // Router.replace(`/article/detail/?id=${articleId}`)
         }
     };
