@@ -9,12 +9,15 @@ import { fetcherGet } from '../../lib/fetcher'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
 
-const Article = (props) => {
+const Article = () => {
     const { userToken } = useAuth()
     const Router = useRouter()
 
     let title = Router.query.title
-    const { data: newsResult, error } = useSWR(`${process.env.API_URI}article/search?title=${title}`, fetcherGet, { initialData: props.articleSearch })
+    const { data: newsResult, error } = useSWR(`${process.env.API_URI}article/search?title=${title}`, fetcherGet)
+
+    console.log(newsResult)
+
 
     return (
         <div>
@@ -61,32 +64,36 @@ const Article = (props) => {
 
                 <div className="container">
                     <div className="mt-2 mb-5 row text-left sc-four">
-                        {!newsResult && (
+                        {newsResult == 'Request failed with status code 400' ? (
                             <div className="mt-2">
-                                <h6>No Result</h6>
+                                <p></p>
+                                <p></p>
+                                <br/>
                             </div>
-                        )}
-                        {newsResult && newsResult.map((data) => {
-                            return (
-                                <Link href={`/article/detail/?id=${data.id}`}>
-                                    <a className="col-md-4">
-                                        <div className="mt-3 d-flex article-box .box-2">
-                                            <Image className="article-cover-b" src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
-                                            <div className="article-right pt-2">
-                                                <h6 className="title">{data.article_title}</h6>
-                                                {/* <div className="article-info mb-2">
-                                                    <Image src="/icon/like-icon.svg" alt="like icon" width={30} height={15} />
-                                                    <span>{ }</span>
-                                                    <Image src="/icon/clock.svg" alt="clock icon" width={30} height={15} />
-                                                    <span></span>
-                                                    <Image src="/icon/bookmark.svg" alt="save icon" width={30} height={15} />
-                                                </div> */}
+                        ) : (
+                            newsResult && newsResult.map((data) => {
+                                return (
+                                    <Link href={`/article/detail/?id=${data.id}`}>
+                                        <a className="col-md-4">
+                                            <div className="mt-3 d-flex article-box .box-2">
+                                                <Image className="article-cover-b" src={`${process.env.PUBLIC_URI}${data.article_cover}`} alt="category" width={190} height={190} />
+                                                <div className="article-right pt-2">
+                                                    <h6 className="title">{data.article_title}</h6>
+                                                    {/* <div className="article-info mb-2">
+                                                        <Image src="/icon/like-icon.svg" alt="like icon" width={30} height={15} />
+                                                        <span>{ }</span>
+                                                        <Image src="/icon/clock.svg" alt="clock icon" width={30} height={15} />
+                                                        <span></span>
+                                                        <Image src="/icon/bookmark.svg" alt="save icon" width={30} height={15} />
+                                                    </div> */}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </Link>
-                            )
-                        })}
+                                        </a>
+                                    </Link>
+                                )
+                            })
+                        )
+                        }
 
                     </div>
                 </div>
@@ -100,15 +107,16 @@ const Article = (props) => {
     )
 }
 
-export async function getServerSideProps({ query }) {
+// export async function getServerSideProps({ query }) {
 
-    const articleSearch = await fetcherGet(`${process.env.API_URI}article/search?title=${query.title}`)
+//     const article = await fetcherGet(`${process.env.API_URI}article/search?title=${query.title}`)
+//     const articleSearch = article.data
 
-    return {
-        props: {
-            articleSearch
-        }
-    }
-}
+//     return {
+//         props: {
+//             articleSearch
+//         }
+//     }
+// }
 
 export default Article
