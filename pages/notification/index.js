@@ -107,7 +107,8 @@ const Notification = () => {
                                 </div>
                             ) : (
                                 userNotif && userNotif.map((item) => {
-                                    return (
+                                    <div>
+                                        return (
                                         <div>
                                             <div className="d-flex mt-3 justify-content-between">
                                                 <div className="d-flex notif-list">
@@ -123,11 +124,12 @@ const Notification = () => {
                                                     <input type="checkbox" className="custom-control-input" id="select-n" name={item.id} checked={isChecked.includes(parseInt(item.id))} onChange={handleCheck} />
                                                 </div>
                                             </div>
-                                            <div className="d-flex justify-content-center btn-delete">
-                                                <button className="w-50 btn btn-lg btn-primary btn-wrap mt-2" type="submit" onClick={handleSubmit}>Delete Selected Items</button>
-                                            </div>
                                         </div>
-                                    )
+                                        )
+                                        <div className="d-flex justify-content-center btn-delete">
+                                            <button className="w-50 btn btn-lg btn-primary btn-wrap mt-2" type="submit" onClick={handleSubmit}>Delete Selected Items</button>
+                                        </div>
+                                    </div>
                                 })
                             )}
                         </form>
